@@ -1,0 +1,13 @@
+plotly
+pandas
+openpyxl
+numpy
+streamlit_authenticator 
+xlsxwriter
+streamlit_option_menu
+matplotlib
+reportlab
+PyPDF2
+streamlit_extras
+pio
+kaleido
