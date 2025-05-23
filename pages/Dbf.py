@@ -36,4 +36,4 @@ if uploaded_file is not None:
 
 
     st.success("Arquivo Carregado")
-    st.dataframe(df)
+    
