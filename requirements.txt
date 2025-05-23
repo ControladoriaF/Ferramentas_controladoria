@@ -11,3 +11,4 @@ PyPDF2
 streamlit_extras
 pio
 kaleido
+ofxparse 
