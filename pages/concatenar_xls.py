@@ -2,9 +2,9 @@ import pandas as pd
 import streamlit as st
 from io import BytesIO
 
-st.title('Concatenate Multiple Excel Files (Optimized)')
+st.title('concatenar arquivos do Excel(pequenos)')
 
-uploaded_files = st.file_uploader("Choose Excel files", accept_multiple_files=True, type=["xlsx"])
+uploaded_files = st.file_uploader("Suba os arquivos", accept_multiple_files=True, type=["xlsx"])
 
 if uploaded_files:
     all_data = []
