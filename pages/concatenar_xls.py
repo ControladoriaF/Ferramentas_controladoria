@@ -1,39 +1,33 @@
 import pandas as pd
 import streamlit as st
+from io import BytesIO
 
-# Streamlit app interface to upload files
-st.title('Concatenate Multiple Excel Files')
+st.title('Concatenate Multiple Excel Files (Optimized)')
 
-  
-#streamlit run concatenar_xls.py
-
-# Allow user to upload multiple Excel files
-uploaded_files = st.file_uploader("Choose Excel files", accept_multiple_files=True)
+uploaded_files = st.file_uploader("Choose Excel files", accept_multiple_files=True, type=["xlsx"])
 
 if uploaded_files:
-    all_data = []  # List to store data from all files
+    all_data = []
 
+    # Iterate over uploaded files
     for file in uploaded_files:
-        # Read each uploaded Excel file
-        df = pd.read_excel(file)
-        
-        # Append the data from the current file to the list
+        # Read only the necessary sheet and columns if applicable
+        df = pd.read_excel(file, engine='openpyxl')  # openpyxl is often faster for xlsx
         all_data.append(df)
 
-    # Concatenate all the DataFrames from the uploaded files
+    # Efficiently concatenate
     combined_df = pd.concat(all_data, ignore_index=True)
 
-    # Show the combined data in the app
     st.write('Combined Data Preview:', combined_df)
 
-    # Allow the user to download the combined file
-    output = 'combined_output.xlsx'
-    combined_df.to_excel(output, index=False)
+    # Write to an in-memory buffer instead of disk
+    output_buffer = BytesIO()
+    combined_df.to_excel(output_buffer, index=False, engine='openpyxl')
+    output_buffer.seek(0)
 
-    with open(output, 'rb') as f:
-        st.download_button(
-            label="Download Combined Excel File",
-            data=f,
-            file_name=output,
-            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-        )
+    st.download_button(
+        label="Download Combined Excel File",
+        data=output_buffer,
+        file_name='combined_output.xlsx',
+        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )
