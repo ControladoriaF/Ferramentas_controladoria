@@ -12,3 +12,4 @@ streamlit_extras
 pio
 kaleido
 ofxparse 
+dbfread 
