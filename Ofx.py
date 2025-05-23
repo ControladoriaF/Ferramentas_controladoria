@@ -16,9 +16,9 @@ def convert_to_int(value):
             # If it fails, return NaN or the original value
             return np.nan  # You can return np.nan or the original value if needed
 
-st.title("OFX File Reader")
+st.title("OFX Leitor")
 
-uploaded_file = st.file_uploader("Upload your .ofx file", type=["ofx"])
+uploaded_file = st.file_uploader("Upload o Arquivo .ofx", type=["ofx"])
 
 if uploaded_file is not None:
     try:
