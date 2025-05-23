@@ -18,7 +18,8 @@ if uploaded_file is not None:
 
     table = DBF("temp_file.dbf", load=True, encoding='latin-1')
     df = pd.DataFrame(iter(table))
-    df
+    st.write(f"Quantidade de Linhas {len(df)}")
+    st.dataframe(df)
     modified_excel = BytesIO()
 
     with pd.ExcelWriter(modified_excel, engine="xlsxwriter") as writer:
